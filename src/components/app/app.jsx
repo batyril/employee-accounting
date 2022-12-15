@@ -6,6 +6,7 @@ import AppFilter from '../app-filter/app-filter.jsx';
 import StaffList from '../staff-list/staff-list.jsx';
 import StaffAddItem from '../staff-add-form/staff-add-item.jsx';
 
+
 function App() {
   const data = [
     { name: 'Артем В.', salary: 800, increase: true, id: 1 },
