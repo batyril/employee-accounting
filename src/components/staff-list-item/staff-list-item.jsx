@@ -5,7 +5,7 @@ class StaffListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      increase: false,
+      increase: this.props.increase,
       like: false,
     };
   }
@@ -23,7 +23,7 @@ class StaffListItem extends React.Component {
   };
 
   render() {
-    const { name, salary } = this.props;
+    const { name, salary, onDelete } = this.props;
     const { increase, like } = this.state;
     const className = 'list-group-item d-flex justify-content-between';
     const classIncrease = increase ? ' increase' : ' ';
@@ -47,7 +47,11 @@ class StaffListItem extends React.Component {
             <i className='fas fa-cookie' />
           </button>
 
-          <button type='button' className='btn-trash btn-sm '>
+          <button
+            onClick={onDelete}
+            type='button'
+            className='btn-trash btn-sm '
+          >
             <i className='fas fa-trash' />
           </button>
           <i className='fas fa-star' />
