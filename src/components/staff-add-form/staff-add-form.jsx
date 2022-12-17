@@ -1,5 +1,5 @@
 import React from 'react';
-import './staff-add-form.css';
+import './staff-add-form.sass';
 
 class StaffAddForm extends React.Component {
   constructor(props) {

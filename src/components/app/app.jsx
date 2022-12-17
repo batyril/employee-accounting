@@ -67,6 +67,28 @@ class App extends React.Component {
     }));
   };
 
+  onChangeSalary = (id, countSalary) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, salary: +countSalary };
+        }
+        return item;
+      }),
+    }));
+  };
+
+  onChangeName = (id, name) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, name };
+        }
+        return item;
+      }),
+    }));
+  };
+
   searchStaff = (items, data) => {
     if (items.length === 0) {
       return data;
@@ -99,7 +121,17 @@ class App extends React.Component {
 
   render() {
     const { data, searchValue, filter } = this.state;
-    const { filterStaff, searchStaff } = this;
+    const {
+      addStaff,
+      filterStaff,
+      searchStaff,
+      onChangeSalary,
+      onToggleProp,
+      deleteStaff,
+      onUpdateFilter,
+      onUpdateSearch,
+      onChangeName,
+    } = this;
     const countStaff = data.length;
     const countIncrease = data.filter((obj) => obj.increase).length;
     const visibleData = filterStaff(searchStaff(searchValue, data), filter);
@@ -111,18 +143,17 @@ class App extends React.Component {
           countIncrease={countIncrease}
         />
         <div className='search-panel'>
-          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter
-            valuefilter={filter}
-            onUpdateFilter={this.onUpdateFilter}
-          />
+          <SearchPanel onUpdateSearch={onUpdateSearch} />
+          <AppFilter valuefilter={filter} onUpdateFilter={onUpdateFilter} />
         </div>
         <StaffList
-          onToggleProp={this.onToggleProp}
-          onDelete={this.deleteStaff}
+          onChangeName={onChangeName}
+          onChangeSalary={onChangeSalary}
+          onToggleProp={onToggleProp}
+          onDelete={deleteStaff}
           staffData={visibleData}
         />
-        <StaffAddForm onAdd={this.addStaff} />
+        <StaffAddForm onAdd={addStaff} />
       </div>
     );
   }
